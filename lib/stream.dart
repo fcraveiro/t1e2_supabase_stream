@@ -37,7 +37,7 @@ class _StreamState extends State<Stream> {
               onTap: () => _inputDialog(),
               child: const Icon(Icons.add_a_photo)),
           const SizedBox(
-            width: 20,
+            width: 15,
           ),
         ],
       ),
@@ -92,7 +92,6 @@ class _StreamState extends State<Stream> {
                                 ),
                                 trailing: Image.network(
                                   lista[index].streamThumbUrl,
-//                                      fit: BoxFit.cover,
                                 ),
                               ),
                             );
@@ -115,6 +114,7 @@ class _StreamState extends State<Stream> {
           return AlertDialog(
             title: const Text('Digite o Nome'),
             content: TextField(
+              onChanged: (value) {},
               controller: _textFieldController,
               decoration: const InputDecoration(hintText: "Nome"),
             ),

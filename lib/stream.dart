@@ -34,15 +34,10 @@ class _StreamState extends State<Stream> {
         backgroundColor: const Color(0xFF48426D),
         actions: [
           GestureDetector(
-              onTap: () => _inputDialog(), child: const Icon(Icons.add)),
-          const SizedBox(
-            width: 10,
-          ),
-          GestureDetector(
               onTap: () => _inputDialog(),
               child: const Icon(Icons.add_a_photo)),
           const SizedBox(
-            width: 15,
+            width: 20,
           ),
         ],
       ),
@@ -80,20 +75,26 @@ class _StreamState extends State<Stream> {
                         return ListView.builder(
                           itemCount: lista.length,
                           itemBuilder: (BuildContext context, index) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                child: Text(
-                                  lista[index]
-                                      .streamNome
-                                      .toString()
-                                      .substring(0, 1)
-                                      .toUpperCase(),
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  child: Text(
+                                    lista[index]
+                                        .streamNome
+                                        .toString()
+                                        .substring(0, 1)
+                                        .toUpperCase(),
+                                  ),
+                                ),
+                                title: Text(
+                                  lista[index].streamNome.toString(),
+                                ),
+                                trailing: Image.network(
+                                  lista[index].streamThumbUrl,
+//                                      fit: BoxFit.cover,
                                 ),
                               ),
-                              title: Text(
-                                lista[index].streamNome.toString(),
-                              ),
-                              trailing: const Icon(Icons.mail),
                             );
                           },
                         );
@@ -114,7 +115,6 @@ class _StreamState extends State<Stream> {
           return AlertDialog(
             title: const Text('Digite o Nome'),
             content: TextField(
-              onChanged: (value) {},
               controller: _textFieldController,
               decoration: const InputDecoration(hintText: "Nome"),
             ),
@@ -129,8 +129,8 @@ class _StreamState extends State<Stream> {
               ElevatedButton(
                 child: const Text('OK'),
                 onPressed: () {
-                  log(_textFieldController.text);
                   grava(_textFieldController.text);
+                  _textFieldController.clear();
                   Navigator.pop(context);
                 },
               ),
